@@ -73,6 +73,27 @@
         }
       }
     }
+    function numeroAleatorio(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function pintarComida(){
+      let posicionX = numeroAleatorio(0,21);
+      let posicionY = numeroAleatorio(0,21);
+      colorComida(posicionX,posicionY) 
+    }
+
+    function colorComida(lineaX, lineaY){
+      let x = lineaX * TAMANIO_CELDA
+      let y = lineaY * TAMANIO_CELDA
+      ctx.fillStyle = "#c7bb0f";
+      ctx.fillRect(x,y,TAMANIO_CELDA,TAMANIO_CELDA);
+      ctx.strokeStyle = "#ffffff";
+      ctx.strokeRect (x,y,TAMANIO_CELDA,TAMANIO_CELDA);
+    }
+
     // =========================
     function cambiarDireccion(direccion){
       if (direccion=="derecha"){
