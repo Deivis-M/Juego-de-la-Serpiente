@@ -72,6 +72,13 @@
       }
     }
     // =========================
+    function cambiarDireccion(direccion){
+      if (direccion=="derecha"){
+        moverDerecha();
+        dibujarTodo();
+      }
+    }
+
 
     function moverDerecha(){
       let cabezaSepiente=serpiente[0]
