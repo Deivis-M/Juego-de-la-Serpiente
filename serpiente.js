@@ -27,6 +27,15 @@
       ctx.stroke()   
       }
     }
+
+    function pintarParte(lineaX, lineaY){
+      let x = lineaX * TAMANIO_CELDA
+      let y = lineaY * TAMANIO_CELDA
+      ctx.fillStyle = "#ff0202";
+      ctx.fillRect(x,y,TAMANIO_CELDA,TAMANIO_CELDA);
+      ctx.strokeStyle = "#fdfdfd";
+      ctx.strokeRect (x,y,TAMANIO_CELDA,TAMANIO_CELDA);
+    }
     // =========================
 
     function limpiarCanvas() {
@@ -36,6 +45,12 @@
     function dibujarTodo() {
       limpiarCanvas();
       dibujarTablero();
+      pintarParte(5,5);
+      pintarParte(10,2);
+      pintarParte(0,(canvas.height/TAMANIO_CELDA)-1);
+      pintarParte((canvas.width/TAMANIO_CELDA)-1,(canvas.height/TAMANIO_CELDA)-1);
+      pintarParte((canvas.width/TAMANIO_CELDA)-1,0);
+      pintarParte(0,3);
     }
 
 
