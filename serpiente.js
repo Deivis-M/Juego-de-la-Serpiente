@@ -20,6 +20,8 @@
     ];
     let intervaloSerpiente 
     let direccionActual = "derecha";
+    let comidaPosicionX 
+    let comidaPosicionY 
     
 
     // Primera pintura del juego al cargar la página
@@ -80,9 +82,9 @@
     }
 
     function pintarComida(){
-      let posicionX = numeroAleatorio(0,21);
-      let posicionY = numeroAleatorio(0,21);
-      colorComida(posicionX,posicionY) 
+      let comidaPosicionX = numeroAleatorio(0,21);
+      let comidaPosicionY = numeroAleatorio(0,21);
+      colorComida(comidaPosicionX,comidaPosicionY) 
     }
 
     function colorComida(lineaX, lineaY){
@@ -177,6 +179,16 @@
       clearInterval(intervaloSerpiente);
     }
 
+    function atrapaComida(){
+      let posicionCabeza = serpiente[0]
+      if ( comidaPosicionX == posicionCabeza.x &&
+           comidaPosicionY== posicionCabeza.y){
+            return true
+           }
+      else{
+        return false
+      }
+    }
 
     function limpiarCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
