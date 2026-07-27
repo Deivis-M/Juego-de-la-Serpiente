@@ -127,6 +127,15 @@
       serpiente.pop();
     }
 
+    function iniciarJuego(){
+
+    }
+
+    function pausarJuego (){
+      
+    }
+
+
     function limpiarCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
