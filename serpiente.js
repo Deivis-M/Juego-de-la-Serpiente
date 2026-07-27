@@ -18,6 +18,7 @@
       {x:16,y:12},
       {x:16,y:11},
     ];
+    let intervaloSerpiente 
     
 
     // Primera pintura del juego al cargar la página
@@ -132,11 +133,11 @@
     }
 
     function iniciarJuego(){
-      setInterval(moverSerpiente,1000);
+      intervaloSerpiente = setInterval(moverSerpiente,1000);
     }
 
     function pausarJuego (){
-      
+      clearInterval(intervaloSerpiente);
     }
 
 
