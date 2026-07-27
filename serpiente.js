@@ -127,8 +127,12 @@
       serpiente.pop();
     }
 
-    function iniciarJuego(){
+    function moverSerpiente(){
+      console.log("moviendo");
+    }
 
+    function iniciarJuego(){
+      setInterval(moverSerpiente,1000);
     }
 
     function pausarJuego (){
