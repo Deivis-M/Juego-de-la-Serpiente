@@ -19,6 +19,7 @@
       {x:16,y:11},
     ];
     let intervaloSerpiente 
+    let direccionActual = "derecha";
     
 
     // Primera pintura del juego al cargar la página
@@ -75,20 +76,16 @@
     // =========================
     function cambiarDireccion(direccion){
       if (direccion=="derecha"){
-        moverDerecha();
-        dibujarTodo();
+        direccionActual = "derecha";
       }
       else if (direccion == "izquierda"){
-        moverIzquierda()
-        dibujarTodo()
+        direccionActual = "izquierda";
       }
       else if (direccion == "arriba"){
-        moverArriba()
-        dibujarTodo()
+        direccionActual = "arriba";
       }
       else if (direccion == "abajo"){
-        moverAbajo()
-        dibujarTodo()
+        direccionActual = "abajo";
       }
     }
 
@@ -129,7 +126,26 @@
     }
 
     function moverSerpiente(){
-      console.log("moviendo");
+      if (direccionActual == "derecha"){
+        moverDerecha();
+        dibujarTodo();
+        pintarSerpiente();
+      }
+      else if (direccionActual == "izquierda") {
+        moverIzquierda();
+        dibujarTodo();
+        pintarSerpiente();
+      }
+      else if (direccionActual == "arriba") {
+        moverArriba();
+        dibujarTodo();
+        pintarSerpiente();
+      }
+      else if (direccionActual == "abajo") {
+        moverAbajo();
+        dibujarTodo();
+        pintarSerpiente();
+      }
     }
 
     function iniciarJuego(){
