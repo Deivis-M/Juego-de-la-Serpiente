@@ -73,6 +73,15 @@
     }
     // =========================
 
+    function moverDerecha(){
+      let cabezaSepiente=serpiente[0]
+      let nuevaCabeza = {}
+      nuevaCabeza.x = cabezaSepiente.x+1
+      nuevaCabeza.y = cabezaSepiente .y 
+      serpiente.unshift(nuevaCabeza);
+      serpiente.pop();
+    }
+
     function limpiarCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
