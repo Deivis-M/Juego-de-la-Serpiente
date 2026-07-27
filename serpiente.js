@@ -22,6 +22,7 @@
     let direccionActual = "derecha";
     let comidaPosicionX 
     let comidaPosicionY 
+    let puntaje = 0 ;
     
 
     // Primera pintura del juego al cargar la página
@@ -149,30 +150,75 @@
     }
 
     function moverSerpiente(){
+      let estadoPuntaje 
+      let longitud= serpiente.length
+      let finalSepriente 
+      let cuadroFinal = {}
       if (direccionActual == "derecha"){
+        finalSepriente = serpiente[longitud-1]
         moverDerecha();
         dibujarTodo();
         pintarSerpiente();
+      estadoPuntaje = atrapaComida()
+        if (estadoPuntaje == true){
+          puntaje =puntaje+1
+          modificarPuntaje=document.getElementById("puntaje")
+          modificarPuntaje.textContent = puntaje
+          cuadroFinal.x = finalSepriente.x - 1
+          cuadroFinal.y = finalSepriente .y 
+          serpiente.push (cuadroFinal)
+        }
       }
       else if (direccionActual == "izquierda") {
+        finalSepriente = serpiente[longitud-1]
         moverIzquierda();
         dibujarTodo();
         pintarSerpiente();
+        estadoPuntaje = atrapaComida()
+        if (estadoPuntaje == true){
+          puntaje =puntaje+1
+          modificarPuntaje=document.getElementById("puntaje")
+          modificarPuntaje.textContent = puntaje
+          cuadroFinal.x = finalSepriente.x + 1
+          cuadroFinal.y = finalSepriente .y 
+          serpiente.push (cuadroFinal)
+        }
       }
       else if (direccionActual == "arriba") {
+        finalSepriente = serpiente[longitud-1]
         moverArriba();
         dibujarTodo();
         pintarSerpiente();
+        estadoPuntaje = atrapaComida()
+        if (estadoPuntaje == true){
+          puntaje =puntaje+1
+          modificarPuntaje=document.getElementById("puntaje")
+          modificarPuntaje.textContent = puntaje
+          cuadroFinal.x = finalSepriente.x 
+          cuadroFinal.y = finalSepriente .y+1 
+          serpiente.push (cuadroFinal)
+        }
       }
       else if (direccionActual == "abajo") {
+        finalSepriente = serpiente[longitud-1]
         moverAbajo();
         dibujarTodo();
         pintarSerpiente();
+        estadoPuntaje = atrapaComida()
+        if (estadoPuntaje == true){
+          puntaje =puntaje+1
+          modificarPuntaje=document.getElementById("puntaje")
+          modificarPuntaje.textContent = puntaje
+          cuadroFinal.x = finalSepriente.x 
+          cuadroFinal.y = finalSepriente .y-1 
+          serpiente.push (cuadroFinal)
+        }
       }
     }
 
     function iniciarJuego(){
       intervaloSerpiente = setInterval(moverSerpiente,1000);
+  
     }
 
     function pausarJuego (){
