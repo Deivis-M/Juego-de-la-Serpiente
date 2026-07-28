@@ -83,9 +83,9 @@
     }
 
     function pintarComida(){
-      let comidaPosicionX = numeroAleatorio(0,21);
-      let comidaPosicionY = numeroAleatorio(0,21);
-      colorComida(comidaPosicionX,comidaPosicionY) 
+    comidaPosicionX = numeroAleatorio(0,21);
+    comidaPosicionY = numeroAleatorio(0,21);
+    colorComida(comidaPosicionX,comidaPosicionY) 
     }
 
     function colorComida(lineaX, lineaY){
