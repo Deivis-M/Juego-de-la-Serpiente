@@ -4,19 +4,11 @@
     const ctx = canvas.getContext("2d");
     const TAMANIO_CELDA = 25;
     const serpiente = [
-      {x:20,y:9},
-      {x:20,y:10},
-      {x:20,y:11},
-      {x:20,y:12},
-      {x:20,y:13},
-      {x:19,y:13},
-      {x:18,y:13},
-      {x:18,y:14},
-      {x:17,y:14},
-      {x:16,y:14},
-      {x:16,y:13},
-      {x:16,y:12},
-      {x:16,y:11},
+      {x:5,y:9},
+      {x:4,y:9},
+      {x:3,y:9},
+      {x:2,y:9},
+
     ];
     let intervaloSerpiente 
     let direccionActual = "derecha";
@@ -149,70 +141,98 @@
       serpiente.pop();
     }
 
+    function verificarBordes(){
+    let cabezaSerpiente = serpiente[0];
+    if(cabezaSerpiente.x < 0){
+     return true;
+    }
+    else if(cabezaSerpiente.x > 21){
+     return true;
+    }
+    else if(cabezaSerpiente.y < 0){
+     return true;
+    }
+    else if(cabezaSerpiente.y > 21){
+     return true;
+    }
+    else{
+     return false;
+    }
+    }
+
+
     function moverSerpiente(){
-      let estadoPuntaje 
-      let longitud= serpiente.length
-      let finalSepriente 
-      let cuadroFinal = {}
-      if (direccionActual == "derecha"){
-        finalSepriente = serpiente[longitud-1]
-        moverDerecha();
-        dibujarTodo();
-        pintarSerpiente();
-      estadoPuntaje = atrapaComida()
-        if (estadoPuntaje == true){
-          puntaje =puntaje+1
-          modificarPuntaje=document.getElementById("puntaje")
-          modificarPuntaje.textContent = puntaje
-          cuadroFinal.x = finalSepriente.x - 1
-          cuadroFinal.y = finalSepriente .y 
-          serpiente.push (cuadroFinal)
-        }
-      }
-      else if (direccionActual == "izquierda") {
-        finalSepriente = serpiente[longitud-1]
-        moverIzquierda();
-        dibujarTodo();
-        pintarSerpiente();
+      let estadoBordes=verificarBordes()
+      if (estadoBordes == false){
+        let estadoPuntaje 
+        let longitud= serpiente.length
+        let finalSepriente 
+        let cuadroFinal = {}
+        if (direccionActual == "derecha"){
+          finalSepriente = serpiente[longitud-1]
+          moverDerecha();
+          dibujarTodo();
+          pintarSerpiente();
         estadoPuntaje = atrapaComida()
-        if (estadoPuntaje == true){
-          puntaje =puntaje+1
-          modificarPuntaje=document.getElementById("puntaje")
-          modificarPuntaje.textContent = puntaje
-          cuadroFinal.x = finalSepriente.x + 1
-          cuadroFinal.y = finalSepriente .y 
-          serpiente.push (cuadroFinal)
+          if (estadoPuntaje == true){
+            puntaje =puntaje+1
+            modificarPuntaje=document.getElementById("puntaje")
+            modificarPuntaje.textContent = puntaje
+            cuadroFinal.x = finalSepriente.x - 1
+            cuadroFinal.y = finalSepriente .y 
+            serpiente.push (cuadroFinal)
+          }
         }
+        else if (direccionActual == "izquierda") {
+          finalSepriente = serpiente[longitud-1]
+          moverIzquierda();
+          dibujarTodo();
+          pintarSerpiente();
+          estadoPuntaje = atrapaComida()
+          if (estadoPuntaje == true){
+            puntaje =puntaje+1
+            modificarPuntaje=document.getElementById("puntaje")
+            modificarPuntaje.textContent = puntaje
+            cuadroFinal.x = finalSepriente.x + 1
+            cuadroFinal.y = finalSepriente .y 
+            serpiente.push (cuadroFinal)
+          }
+        }
+        else if (direccionActual == "arriba") {
+          finalSepriente = serpiente[longitud-1]
+          moverArriba();
+          dibujarTodo();
+          pintarSerpiente();
+          estadoPuntaje = atrapaComida()
+          if (estadoPuntaje == true){
+            puntaje =puntaje+1
+            modificarPuntaje=document.getElementById("puntaje")
+            modificarPuntaje.textContent = puntaje
+            cuadroFinal.x = finalSepriente.x 
+            cuadroFinal.y = finalSepriente .y+1 
+            serpiente.push (cuadroFinal)
+          }
+        }
+        else if (direccionActual == "abajo") {
+          finalSepriente = serpiente[longitud-1]
+          moverAbajo();
+          dibujarTodo();
+          pintarSerpiente();
+          estadoPuntaje = atrapaComida()
+          if (estadoPuntaje == true){
+            puntaje =puntaje+1
+            modificarPuntaje=document.getElementById("puntaje")
+            modificarPuntaje.textContent = puntaje
+            cuadroFinal.x = finalSepriente.x 
+            cuadroFinal.y = finalSepriente .y-1 
+            serpiente.push (cuadroFinal)
+          }
+        } 
       }
-      else if (direccionActual == "arriba") {
-        finalSepriente = serpiente[longitud-1]
-        moverArriba();
-        dibujarTodo();
-        pintarSerpiente();
-        estadoPuntaje = atrapaComida()
-        if (estadoPuntaje == true){
-          puntaje =puntaje+1
-          modificarPuntaje=document.getElementById("puntaje")
-          modificarPuntaje.textContent = puntaje
-          cuadroFinal.x = finalSepriente.x 
-          cuadroFinal.y = finalSepriente .y+1 
-          serpiente.push (cuadroFinal)
-        }
-      }
-      else if (direccionActual == "abajo") {
-        finalSepriente = serpiente[longitud-1]
-        moverAbajo();
-        dibujarTodo();
-        pintarSerpiente();
-        estadoPuntaje = atrapaComida()
-        if (estadoPuntaje == true){
-          puntaje =puntaje+1
-          modificarPuntaje=document.getElementById("puntaje")
-          modificarPuntaje.textContent = puntaje
-          cuadroFinal.x = finalSepriente.x 
-          cuadroFinal.y = finalSepriente .y-1 
-          serpiente.push (cuadroFinal)
-        }
+      else{
+        clearInterval(intervaloSerpiente);
+        document.getElementById("estado").textContent = "Game Over"
+        document.getElementById("mensaje").textContent = "GAME OVER - Puntaje final: " + puntaje
       }
     }
 
