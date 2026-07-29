@@ -237,6 +237,8 @@
     }
 
     function iniciarJuego(){
+    document.getElementById("estado").textContent = "Jugando"
+      document.getElementById("mensaje").textContent = " "
       intervaloSerpiente = setInterval(moverSerpiente,1000);
   
     }
@@ -258,6 +260,27 @@
 
     function limpiarCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function crearSerpienteInicial(){
+      serpiente.length = 0;
+      serpiente.push({x:5,y:9}),
+      serpiente.push({x:4,y:9}),
+      serpiente.push({x:3,y:9}),
+      serpiente.push({x:2,y:9})
+    }
+
+    function reiniciarJuego(){
+      pausarJuego();
+      crearSerpienteInicial();
+      direccionActual = "derecha";
+      puntaje = 0 ;
+      clearInterval(intervaloSerpiente);
+      dibujarTodo();
+      iniciarJuego();
+      document.getElementById("estado").textContent = "Juego Reiniciado"
+      document.getElementById("mensaje").textContent = "Presiona iniciar para comenzar."
+      clearInterval(intervaloSerpiente);
     }
 
     function dibujarTodo() {
