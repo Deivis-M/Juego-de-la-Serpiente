@@ -3,6 +3,7 @@
     const canvas = document.getElementById("canvasJuego");
     const ctx = canvas.getContext("2d");
     const TAMANIO_CELDA = 25;
+    const RESTA_VELOCIDAD = 50 ;
     const serpiente = [
       {x:5,y:9},
       {x:4,y:9},
@@ -15,6 +16,8 @@
     let comidaPosicionX 
     let comidaPosicionY 
     let puntaje = 0 ;
+    let velocidad = 600;
+
     
 
     // Primera pintura del juego al cargar la página
@@ -181,6 +184,9 @@
             cuadroFinal.x = finalSepriente.x - 1
             cuadroFinal.y = finalSepriente .y 
             serpiente.push (cuadroFinal)
+            velocidad = velocidad - RESTA_VELOCIDAD
+            clearInterval(intervaloSerpiente);
+            intervaloSerpiente = setInterval(moverSerpiente, velocidad);    
           }
         }
         else if (direccionActual == "izquierda") {
@@ -196,6 +202,9 @@
             cuadroFinal.x = finalSepriente.x + 1
             cuadroFinal.y = finalSepriente .y 
             serpiente.push (cuadroFinal)
+            velocidad = velocidad - RESTA_VELOCIDAD
+            clearInterval(intervaloSerpiente);
+            intervaloSerpiente = setInterval(moverSerpiente, velocidad);   
           }
         }
         else if (direccionActual == "arriba") {
@@ -211,6 +220,9 @@
             cuadroFinal.x = finalSepriente.x 
             cuadroFinal.y = finalSepriente .y+1 
             serpiente.push (cuadroFinal)
+            velocidad = velocidad - RESTA_VELOCIDAD
+            clearInterval(intervaloSerpiente);
+            intervaloSerpiente = setInterval(moverSerpiente, velocidad);   
           }
         }
         else if (direccionActual == "abajo") {
@@ -226,6 +238,9 @@
             cuadroFinal.x = finalSepriente.x 
             cuadroFinal.y = finalSepriente .y-1 
             serpiente.push (cuadroFinal)
+            velocidad = velocidad - RESTA_VELOCIDAD
+            clearInterval(intervaloSerpiente);
+            intervaloSerpiente = setInterval(moverSerpiente, velocidad);   
           }
         } 
       }
@@ -239,7 +254,7 @@
     function iniciarJuego(){
     document.getElementById("estado").textContent = "Jugando"
       document.getElementById("mensaje").textContent = " "
-      intervaloSerpiente = setInterval(moverSerpiente,1000);
+      intervaloSerpiente = setInterval(moverSerpiente,velocidad);
   
     }
 
@@ -272,6 +287,7 @@
 
     function reiniciarJuego(){
       pausarJuego();
+      velocidad = 600;
       crearSerpienteInicial();
       direccionActual = "derecha";
       puntaje = 0 ;
