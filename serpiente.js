@@ -17,8 +17,14 @@
     let comidaPosicionY 
     let puntaje = 0 ;
     let velocidad = 600;
-
-    
+    let sonidoDireccion = new Audio("sonidos/direccion.mp3");
+    let sonidoComer = new Audio("sonidos/comer.mp3");
+    let sonidoGameOver = new Audio("sonidos/Game over.mp3");
+    let sonidoGanador = new Audio("sonidos/ganador.mp3");
+    let sonidoFondoGameOver = new Audio("sonidos/sonidoFondoGameOver.mp3");
+    let sonidoFondoGanador = new Audio("sonidos/sonidoFondoGanador.mp3");
+    let sonidoMovimiento = new Audio("sonidos/movimiento.mp3");
+    sonidoMovimiento.loop = true;
 
     // Primera pintura del juego al cargar la página
     dibujarTodo();
@@ -100,21 +106,29 @@
       if (direccion=="derecha"){
         if (direccionActual != "izquierda"){
           direccionActual = "derecha";
+          sonidoDireccion.currentTime = 0;
+          sonidoDireccion.play();
         }
       }
       else if (direccion == "izquierda"){
         if (direccionActual != "derecha"){
           direccionActual = "izquierda";      
+          sonidoDireccion.currentTime = 0;
+          sonidoDireccion.play();
         }
       }
       else if (direccion == "arriba"){
         if (direccionActual != "abajo"){
           direccionActual = "arriba";
+          sonidoDireccion.currentTime = 0;
+          sonidoDireccion.play();
         }
       }
       else if (direccion == "abajo"){
         if (direccionActual != "arriba"){
           direccionActual = "abajo";
+          sonidoDireccion.currentTime = 0;
+          sonidoDireccion.play();
         }
       }
     }
@@ -181,8 +195,7 @@
         if(cabezaSerpiente.x == parteSerpiente.x &&
            cabezaSerpiente.y == parteSerpiente.y){
             pausarJuego()
-          document.getElementById("estado").textContent = "Game Over"
-          document.getElementById("mensaje").textContent = "GAME OVER - Puntaje final: " + puntaje
+            gameOver()
         }
       }
     }
@@ -212,7 +225,8 @@
             serpiente.push (cuadroFinal)
             velocidad = velocidad - RESTA_VELOCIDAD
             clearInterval(intervaloSerpiente);
-            intervaloSerpiente = setInterval(moverSerpiente, velocidad);    
+            intervaloSerpiente = setInterval(moverSerpiente, velocidad); 
+            juegoGanado();   
           }
         }
         else if (direccionActual == "izquierda") {
@@ -232,7 +246,8 @@
             serpiente.push (cuadroFinal)
             velocidad = velocidad - RESTA_VELOCIDAD
             clearInterval(intervaloSerpiente);
-            intervaloSerpiente = setInterval(moverSerpiente, velocidad);   
+            intervaloSerpiente = setInterval(moverSerpiente, velocidad);  
+            juegoGanado(); 
           }
         }
         else if (direccionActual == "arriba") {
@@ -253,6 +268,7 @@
             velocidad = velocidad - RESTA_VELOCIDAD
             clearInterval(intervaloSerpiente);
             intervaloSerpiente = setInterval(moverSerpiente, velocidad);   
+            juegoGanado();
           }
         }
         else if (direccionActual == "abajo") {
@@ -273,13 +289,13 @@
             velocidad = velocidad - RESTA_VELOCIDAD
             clearInterval(intervaloSerpiente);
             intervaloSerpiente = setInterval(moverSerpiente, velocidad);   
+            juegoGanado();
           }
         } 
       }
       else{
         clearInterval(intervaloSerpiente);
-        document.getElementById("estado").textContent = "Game Over"
-        document.getElementById("mensaje").textContent = "GAME OVER - Puntaje final: " + puntaje
+        gameOver()
       }
     }
 
@@ -293,12 +309,42 @@
 
     function pausarJuego (){
       clearInterval(intervaloSerpiente);
+      sonidoMovimiento.pause();
+      sonidoMovimiento.currentTime = 0;
+      document.getElementById("estado").textContent = " Juego PAUSADO"
+      document.getElementById("mensaje").textContent = "Presiona iniciar para comenzar."
     }
+
+    function gameOver(){
+        sonidoMovimiento.pause();
+        sonidoMovimiento.currentTime = 0;
+        sonidoFondoGameOver.currentTime = 0;
+        sonidoFondoGameOver.play(); 
+        sonidoGameOver.currentTime = 0;
+        sonidoGameOver.play();
+        document.getElementById("estado").textContent = "Game Over"
+        document.getElementById("mensaje").textContent = "GAME OVER - Puntaje final: " + puntaje
+    }
+
+    function juegoGanado(){
+      if (puntaje >= 10){
+        pausarJuego()
+        sonidoFondoGanador.currentTime = 0;
+        sonidoFondoGanador.play();
+        sonidoGanador.currentTime = 0;
+        sonidoGanador.play();
+        document.getElementById("estado").textContent = "GANADOR"
+        document.getElementById("mensaje").textContent = " GANADOR - Puntaje final: " + puntaje
+      }
+    }
+
 
     function atrapaComida(){
       let posicionCabeza = serpiente[0]
       if ( comidaPosicionX == posicionCabeza.x &&
            comidaPosicionY== posicionCabeza.y){
+            sonidoComer.currentTime = 0;
+            sonidoComer.play()
             return true
            }
       else{
@@ -319,16 +365,15 @@
     }
 
     function reiniciarJuego(){
-      pausarJuego();
       velocidad = 600;
       crearSerpienteInicial();
       direccionActual = "derecha";
       puntaje = 0 ;
-      clearInterval(intervaloSerpiente);
       dibujarTodo();
-      iniciarJuego();
+      pausarJuego();
       document.getElementById("estado").textContent = "Juego Reiniciado"
       document.getElementById("mensaje").textContent = "Presiona iniciar para comenzar."
+      document.getElementById("puntaje").textContent = puntaje
       clearInterval(intervaloSerpiente);
     }
 
@@ -337,6 +382,7 @@
       dibujarTablero();
       pintarComida();
       pintarSerpiente();
+      sonidoMovimiento.play();
     }
 
 
