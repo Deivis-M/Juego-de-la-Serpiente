@@ -17,6 +17,8 @@
     let comidaPosicionY 
     let puntaje = 0 ;
     let velocidad = 600;
+    let contador = 0;
+    let intervaloTiempo;
     let sonidoDireccion = new Audio("sonidos/direccion.mp3");
     let sonidoComer = new Audio("sonidos/comer.mp3");
     let sonidoGameOver = new Audio("sonidos/Game over.mp3");
@@ -304,6 +306,7 @@
       document.getElementById("mensaje").textContent = " "
       generarComida();
       intervaloSerpiente = setInterval(moverSerpiente,velocidad);
+      intervaloTiempo = setInterval(aumentarTiempo, 1000);
   
     }
 
@@ -313,6 +316,7 @@
       sonidoMovimiento.currentTime = 0;
       document.getElementById("estado").textContent = " Juego PAUSADO"
       document.getElementById("mensaje").textContent = "Presiona iniciar para comenzar."
+      clearInterval(intervaloTiempo);
     }
 
     function gameOver(){
@@ -324,6 +328,9 @@
         sonidoGameOver.play();
         document.getElementById("estado").textContent = "Game Over"
         document.getElementById("mensaje").textContent = "GAME OVER - Puntaje final: " + puntaje
+        clearInterval(intervaloTiempo);
+        contador = 0;
+        document.getElementById("tiempo").textContent = contador;
     }
 
     function juegoGanado(){
@@ -375,6 +382,18 @@
       document.getElementById("mensaje").textContent = "Presiona iniciar para comenzar."
       document.getElementById("puntaje").textContent = puntaje
       clearInterval(intervaloSerpiente);
+      clearInterval(intervaloTiempo);
+      contador = 0;
+      document.getElementById("tiempo").textContent = contador;
+    }
+
+    function aumentarTiempo (){
+      contador = contador + 1 
+      contadorTiempo();
+    }
+
+    function contadorTiempo (){
+      document.getElementById("tiempo").textContent = contador
     }
 
     function dibujarTodo() {
