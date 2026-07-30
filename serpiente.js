@@ -1,9 +1,8 @@
-
-    // 1. Capturamos el canvas y su contexto de dibujo
+// 1. Capturamos el canvas y su contexto de dibujo
     const canvas = document.getElementById("canvasJuego");
     const ctx = canvas.getContext("2d");
     const TAMANIO_CELDA = 25;
-    const RESTA_VELOCIDAD = 50 ;
+    const RESTA_VELOCIDAD = 20 ;
     const serpiente = [
       {x:5,y:9},
       {x:4,y:9},
@@ -12,11 +11,12 @@
 
     ];
     let intervaloSerpiente 
+    let juegoActivo = false;
     let direccionActual = "derecha";
     let comidaPosicionX 
     let comidaPosicionY 
     let puntaje = 0 ;
-    let velocidad = 600;
+    let velocidad = 300;
     let contador = 0;
     let intervaloTiempo;
     let sonidoDireccion = new Audio("sonidos/direccion.mp3");
@@ -302,6 +302,10 @@
     }
 
     function iniciarJuego(){
+      if (juegoActivo){
+        return;
+      }
+      juegoActivo = true;
     document.getElementById("estado").textContent = "Jugando"
       document.getElementById("mensaje").textContent = " "
       generarComida();
@@ -311,6 +315,7 @@
     }
 
     function pausarJuego (){
+      juegoActivo = false;
       clearInterval(intervaloSerpiente);
       sonidoMovimiento.pause();
       sonidoMovimiento.currentTime = 0;
@@ -320,6 +325,7 @@
     }
 
     function gameOver(){
+        juegoActivo = false;
         sonidoMovimiento.pause();
         sonidoMovimiento.currentTime = 0;
         sonidoFondoGameOver.currentTime = 0;
@@ -372,7 +378,8 @@
     }
 
     function reiniciarJuego(){
-      velocidad = 600;
+      juegoActivo = false;
+      velocidad = 300;
       crearSerpienteInicial();
       direccionActual = "derecha";
       puntaje = 0 ;
@@ -403,8 +410,3 @@
       pintarSerpiente();
       sonidoMovimiento.play();
     }
-
-
-
-
-

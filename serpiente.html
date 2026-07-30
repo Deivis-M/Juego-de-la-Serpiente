@@ -3,54 +3,221 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Juego de la Serpiente - Taller</title>
-   <link rel="stylesheet" href="serpiente.css">
+  <title>Serpiente Caza Limones - Casual Game</title>
+  <link rel="stylesheet" href="serpiente.css">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka+One&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Fondo de Selva Nocturna con Luces y Hojas Originales -->
+  <div class="jungle-bg">
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="leaf-blur leaf-1">🍃</div>
+    <div class="leaf-blur leaf-2">🌿</div>
+    <div class="leaf-blur leaf-3">🍃</div>
+  </div>
+
   <main class="contenedor-juego">
-    <h1>🐍 Juego de la Serpiente</h1>
-    <p class="descripcion">
-      Agrega una descripción creativa
-    </p>
 
-    <section class="panel-info">
-      <div class="tarjeta-info">
-        <span>Puntaje</span>
-        <strong id="puntaje">0</strong>
+    <!-- ENCABEZADO CON ELEMENTOS LADO A LADO -->
+    <header class="cartel-titulo">
+      <h1 class="titulo-principal">SERPIENTE</h1>
+      <div class="placa-madera">
+        <span class="hoja-animada hoja-placa-izq" aria-hidden="true">🌿</span>
+        <span>CAZA LIMONES</span>
+        <span class="hoja-animada hoja-placa-der" aria-hidden="true">🍃</span>
       </div>
-      <div class="tarjeta-info">
-        <span>Estado</span>
-        <strong id="estado">Listo</strong>
-      </div>
-      <div class="tarjeta-info">
-        <span>Tiempo</span>
-        <strong id="tiempo">0</strong>
-      </div>
-    </section>
+    </header>
+    <p class="subtitulo">¡Atrapa todos los limones y conviértete en la serpiente más grande!</p>
 
-    <canvas id="canvasJuego" width="550" height="550"></canvas>
+    <!-- CUERPO PRINCIPAL DEL JUEGO -->
+    <div class="layout-juego">
 
-    <section class="controles">
-      <button class="vacio">-</button>
-      <button onclick="cambiarDireccion('arriba')">⬆️</button>
-      <button class="vacio">-</button>
+      <!-- PANEL IZQUIERDO -->
+      <aside class="panel-lateral panel-izquierdo">
+        <div class="tarjeta-info">
+          <div class="icono-tarjeta">⏱️</div>
+          <div class="datos-tarjeta">
+            <span>Tiempo</span>
+            <strong id="tiempo">0</strong>
+          </div>
+        </div>
 
-      <button onclick="cambiarDireccion('izquierda')">⬅️</button>
-      <button onclick="pausarJuego()">⏸️</button>
-      <button onclick="cambiarDireccion('derecha')">➡️</button>
+        <div class="tarjeta-info">
+          <div class="icono-tarjeta">🍋</div>
+          <div class="datos-tarjeta">
+            <span>Puntaje</span>
+            <strong id="puntaje">0</strong>
+          </div>
+        </div>
 
-      <button class="vacio">-</button>
-      <button onclick="cambiarDireccion('abajo')">⬇️</button>
-      <button class="vacio">-</button>
-    </section>
+        <!-- CONTROLES D-PAD ESTILO GAMER SIN PAUSA AL CENTRO -->
+        <div class="tarjeta-info contenedor-controles">
+          <span class="titulo-seccion">Controles</span>
+          <section class="controles">
+            <button class="vacio">-</button>
+            <button class="btn-juego btn-dpad" onclick="cambiarDireccion('arriba')">
+              <span class="btn-icon-gamer">▲</span>
+              <span class="btn-text">Arriba</span>
+            </button>
+            <button class="vacio">-</button>
 
-    <section class="acciones">
-      <button onclick="iniciarJuego()">Iniciar</button>
-      <button class="secundario" onclick="reiniciarJuego()">Reiniciar</button>
-    </section>
+            <button class="btn-juego btn-dpad" onclick="cambiarDireccion('izquierda')">
+              <span class="btn-icon-gamer">◄</span>
+              <span class="btn-text">Izq.</span>
+            </button>
+            <div class="btn-centro-arcade">
+              <span class="icono-centro">⊙</span>
+            </div>
+            <button class="btn-juego btn-dpad" onclick="cambiarDireccion('derecha')">
+              <span class="btn-icon-gamer">►</span>
+              <span class="btn-text">Der.</span>
+            </button>
 
-    <p id="mensaje" class="mensaje">Presiona iniciar para comenzar.</p>
+            <button class="vacio">-</button>
+            <button class="btn-juego btn-dpad" onclick="cambiarDireccion('abajo')">
+              <span class="btn-icon-gamer">▼</span>
+              <span class="btn-text">Abajo</span>
+            </button>
+            <button class="vacio">-</button>
+          </section>
+        </div>
+      </aside>
+
+      <!-- ÁREA CENTRAL: TABLERO DE PIEDRA -->
+      <section class="area-tablero">
+        <div class="marco-piedra">
+          <div class="hoja-decorativa hoja-top-left">🌿</div>
+          <div class="hoja-decorativa hoja-bottom-right">🍃</div>
+          <canvas id="canvasJuego" width="550" height="550"></canvas>
+        </div>
+        <p id="mensaje" class="mensaje-hidden"></p>
+      </section>
+
+      <!-- PANEL DERECHO -->
+      <aside class="panel-lateral panel-derecho">
+        <div class="tarjeta-info tarjeta-estado">
+          <div class="datos-tarjeta">
+            <span>Estado</span>
+            <strong id="estado" class="texto-fino">Listo</strong>
+          </div>
+        </div>
+
+        <!-- ACCIONES CON SÍMBOLOS GRANDES Y MEJORADOS -->
+        <div class="tarjeta-info contenedor-acciones">
+          <span class="titulo-seccion">Acciones</span>
+          <section class="acciones">
+            <button class="btn-juego btn-accion btn-iniciar" onclick="iniciarJuego()">
+              <span class="btn-icon-grande">🚀</span>
+              <span class="btn-text">Iniciar</span>
+            </button>
+
+            <button class="btn-juego btn-accion btn-pausar" onclick="pausarJuego()">
+              <span class="btn-icon-grande">⏸️</span>
+              <span class="btn-text">Pausar</span>
+            </button>
+
+            <button class="btn-juego btn-accion secundario btn-reiniciar" onclick="reiniciarJuego()">
+              <span class="btn-icon-grande">🕹️</span>
+              <span class="btn-text">Reiniciar</span>
+            </button>
+          </section>
+        </div>
+      </aside>
+
+    </div>
   </main>
+
+  <!-- VENTANA GAME OVER (EMERGENTE) -->
+  <div id="modalGameOver" class="overlay-modal">
+    <div class="particulas-rojas"></div>
+    <div class="ventana-modal modal-gameover">
+      <div class="icono-modal-wrapper">
+        <div class="calavera-cartoon">💀</div>
+      </div>
+      <h2 class="titulo-gameover">GAME OVER</h2>
+      <div class="cuerpo-modal">
+        <p class="msg-principal">¡La serpiente chocó!</p>
+        <p class="msg-puntaje">Has conseguido un puntaje de: <strong id="goScore">0</strong></p>
+        <p class="msg-sub">¿Crees poder hacerlo mejor?</p>
+      </div>
+      <button class="btn-juego btn-modal btn-modal-go" onclick="reiniciarJuego()">
+        <span class="btn-icon-grande">🕹️</span>
+        <span class="btn-text">JUGAR DE NUEVO</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- VENTANA GANADOR (EMERGENTE) -->
+  <div id="modalWinner" class="overlay-modal">
+    <div class="confeti-container">
+      <div class="confeti c1">✨</div>
+      <div class="confeti c2">⭐</div>
+      <div class="confeti c3">🌟</div>
+      <div class="confeti c4">✨</div>
+    </div>
+    <div class="ventana-modal modal-winner">
+      <div class="icono-modal-wrapper">
+        <div class="trofeo-cartoon">🏆</div>
+      </div>
+      <h2 class="titulo-winner">¡¡FELICIDADES!!<br><span>HAS GANADO</span></h2>
+      <div class="cuerpo-modal">
+        <p class="msg-principal">¡Has conseguido atrapar todos los limones!</p>
+        <div class="stats-ganador">
+          <p>Tiempo: <strong id="winTime">0</strong>s</p>
+          <p>Puntaje: <strong id="winScore">0</strong></p>
+        </div>
+        <p class="msg-sub-win">Excelente trabajo.</p>
+      </div>
+      <button class="btn-juego btn-modal btn-modal-win" onclick="reiniciarJuego()">
+        <span class="btn-icon-grande">🌟</span>
+        <span class="btn-text">JUGAR OTRA VEZ</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const estadoElem = document.getElementById("estado");
+      const puntajeElem = document.getElementById("puntaje");
+      const tiempoElem = document.getElementById("tiempo");
+      const modalGO = document.getElementById("modalGameOver");
+      const modalWin = document.getElementById("modalWinner");
+      const goScore = document.getElementById("goScore");
+      const winScore = document.getElementById("winScore");
+      const winTime = document.getElementById("winTime");
+
+      const sincronizarVentanas = () => {
+        if (!estadoElem) return;
+        const estado = estadoElem.textContent.trim();
+        const score = puntajeElem ? puntajeElem.textContent : "0";
+        const time = tiempoElem ? tiempoElem.textContent : "0";
+
+        if (estado === "Game Over") {
+          if (goScore) goScore.textContent = score;
+          modalGO.classList.add("activo");
+          modalWin.classList.remove("activo");
+        } else if (estado === "GANADOR") {
+          if (winScore) winScore.textContent = score;
+          if (winTime) winTime.textContent = time;
+          modalWin.classList.add("activo");
+          modalGO.classList.remove("activo");
+        } else {
+          modalGO.classList.remove("activo");
+          modalWin.classList.remove("activo");
+        }
+      };
+
+      const observer = new MutationObserver(sincronizarVentanas);
+      if (estadoElem) {
+        observer.observe(estadoElem, { childList: true, characterData: true, subtree: true });
+      }
+    });
+  </script>
 
   <script src="serpiente.js"></script>
 </body>
