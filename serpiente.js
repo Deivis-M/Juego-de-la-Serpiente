@@ -95,16 +95,24 @@
     // =========================
     function cambiarDireccion(direccion){
       if (direccion=="derecha"){
-        direccionActual = "derecha";
+        if (direccionActual != "izquierda"){
+          direccionActual = "derecha";
+        }
       }
       else if (direccion == "izquierda"){
-        direccionActual = "izquierda";
+        if (direccionActual != "derecha"){
+          direccionActual = "izquierda";      
+        }
       }
       else if (direccion == "arriba"){
-        direccionActual = "arriba";
+        if (direccionActual != "abajo"){
+          direccionActual = "arriba";
+        }
       }
       else if (direccion == "abajo"){
-        direccionActual = "abajo";
+        if (direccionActual != "arriba"){
+          direccionActual = "abajo";
+        }
       }
     }
 
