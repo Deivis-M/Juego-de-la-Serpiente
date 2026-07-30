@@ -77,9 +77,12 @@
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    function pintarComida(){
+    function generarComida(){
     comidaPosicionX = numeroAleatorio(0,21);
     comidaPosicionY = numeroAleatorio(0,21);
+    }
+
+    function pintarComida(){
     colorComida(comidaPosicionX,comidaPosicionY) 
     }
 
@@ -201,6 +204,7 @@
         estadoPuntaje = atrapaComida()
           if (estadoPuntaje == true){
             puntaje =puntaje+1
+            generarComida();
             modificarPuntaje=document.getElementById("puntaje")
             modificarPuntaje.textContent = puntaje
             cuadroFinal.x = finalSepriente.x - 1
@@ -220,6 +224,7 @@
           estadoPuntaje = atrapaComida()
           if (estadoPuntaje == true){
             puntaje =puntaje+1
+            generarComida();
             modificarPuntaje=document.getElementById("puntaje")
             modificarPuntaje.textContent = puntaje
             cuadroFinal.x = finalSepriente.x + 1
@@ -239,6 +244,7 @@
           estadoPuntaje = atrapaComida()
           if (estadoPuntaje == true){
             puntaje =puntaje+1
+            generarComida();
             modificarPuntaje=document.getElementById("puntaje")
             modificarPuntaje.textContent = puntaje
             cuadroFinal.x = finalSepriente.x 
@@ -258,6 +264,7 @@
           estadoPuntaje = atrapaComida()
           if (estadoPuntaje == true){
             puntaje =puntaje+1
+            generarComida();
             modificarPuntaje=document.getElementById("puntaje")
             modificarPuntaje.textContent = puntaje
             cuadroFinal.x = finalSepriente.x 
@@ -279,6 +286,7 @@
     function iniciarJuego(){
     document.getElementById("estado").textContent = "Jugando"
       document.getElementById("mensaje").textContent = " "
+      generarComida();
       intervaloSerpiente = setInterval(moverSerpiente,velocidad);
   
     }
@@ -304,9 +312,6 @@
 
     function crearSerpienteInicial(){
       serpiente.length = 0;
-      serpiente.push({x:8,y:9}),
-      serpiente.push({x:7,y:9}),
-      serpiente.push({x:6,y:9}),
       serpiente.push({x:5,y:9}),
       serpiente.push({x:4,y:9}),
       serpiente.push({x:3,y:9}),
@@ -330,6 +335,7 @@
     function dibujarTodo() {
       limpiarCanvas();
       dibujarTablero();
+      pintarComida();
       pintarSerpiente();
     }
 
