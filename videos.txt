@@ -1,1 +1,3 @@
 https://drive.google.com/file/d/1TEvgXL9SJCFuTdduGPVrcDfIwPVM5FBE/view?usp=sharing (Que la serpiente no se regrese en la misma direccion)
+
+https://drive.google.com/file/d/1Gz42OOyUDVO9Nyw-SdOGv-y0vQaL_CZx/view?usp=sharing(Video explicando funcion verificarChoqueCuerpo())

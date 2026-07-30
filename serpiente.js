@@ -171,6 +171,19 @@
     }
     }
 
+    function verificarChoqueCuerpo(){
+    let cabezaSerpiente = serpiente[0];
+      for(let i = 1; i < serpiente.length; i++){
+        let parteSerpiente = serpiente[i];
+        if(cabezaSerpiente.x == parteSerpiente.x &&
+           cabezaSerpiente.y == parteSerpiente.y){
+            pausarJuego()
+          document.getElementById("estado").textContent = "Game Over"
+          document.getElementById("mensaje").textContent = "GAME OVER - Puntaje final: " + puntaje
+        }
+      }
+    }
+
 
     function moverSerpiente(){
       let estadoBordes=verificarBordes()
@@ -184,6 +197,7 @@
           moverDerecha();
           dibujarTodo();
           pintarSerpiente();
+          verificarChoqueCuerpo()
         estadoPuntaje = atrapaComida()
           if (estadoPuntaje == true){
             puntaje =puntaje+1
@@ -202,6 +216,7 @@
           moverIzquierda();
           dibujarTodo();
           pintarSerpiente();
+          verificarChoqueCuerpo()
           estadoPuntaje = atrapaComida()
           if (estadoPuntaje == true){
             puntaje =puntaje+1
@@ -220,6 +235,7 @@
           moverArriba();
           dibujarTodo();
           pintarSerpiente();
+          verificarChoqueCuerpo()
           estadoPuntaje = atrapaComida()
           if (estadoPuntaje == true){
             puntaje =puntaje+1
@@ -238,6 +254,7 @@
           moverAbajo();
           dibujarTodo();
           pintarSerpiente();
+          verificarChoqueCuerpo()
           estadoPuntaje = atrapaComida()
           if (estadoPuntaje == true){
             puntaje =puntaje+1
@@ -287,6 +304,9 @@
 
     function crearSerpienteInicial(){
       serpiente.length = 0;
+      serpiente.push({x:8,y:9}),
+      serpiente.push({x:7,y:9}),
+      serpiente.push({x:6,y:9}),
       serpiente.push({x:5,y:9}),
       serpiente.push({x:4,y:9}),
       serpiente.push({x:3,y:9}),
